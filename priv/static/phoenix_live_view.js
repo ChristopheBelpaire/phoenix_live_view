@@ -1453,10 +1453,10 @@ removing illegal node: "${(childNode.outerHTML || childNode.nodeValue).trim()}"
     }
   };
   var findScrollContainer = (el) => {
+    if (["HTML", "BODY"].indexOf(el.nodeName.toUpperCase()) >= 0)
+      return null;
     if (["scroll", "auto"].indexOf(getComputedStyle(el).overflowY) >= 0)
       return el;
-    if (document.documentElement === el)
-      return null;
     return findScrollContainer(el.parentElement);
   };
   var scrollTop = (scrollContainer) => {
